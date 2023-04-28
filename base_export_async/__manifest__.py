@@ -23,7 +23,7 @@
     "installable": False,
     'assets': {
         'web.assets_backend': [
-            'base_export_async/static/src/js/data_export.j',
+            'base_export_async/static/src/js/data_export.js',
             'base_export_async/static/src/xml/**/*'
         ],
     },
