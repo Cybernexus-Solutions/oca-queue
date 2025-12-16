@@ -216,7 +216,6 @@
                 <field
                     name="company_id"
                     groups="base.group_multi_company"
-                    widget="selection"
                 />
                 <filter
                     name="wait_dependencies"
@@ -259,19 +258,19 @@
                 <filter
                     name="last_24_hours"
                     string="Last 24 hours"
-                    domain="[('date_created', '&gt;=', (context_today() - datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"
+                    domain="[('date_created', '&gt;', '-1d')]"
                 />
                 <filter
                     name="last_7_days"
                     string="Last 7 days"
-                    domain="[('date_created', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                    domain="[('date_created', '&gt;', 'today -7d +1d')]"
                 />
                 <filter
                     name="last_30_days"
                     string="Last 30 days"
-                    domain="[('date_created', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"
+                    domain="[('date_created', '&gt;', 'today -30d +1d')]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_by_channel"
                         string="Channel"
