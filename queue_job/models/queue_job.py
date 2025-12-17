@@ -129,16 +129,16 @@ class QueueJob(models.Model):
     def init(self):
         index_1 = "queue_job_identity_key_state_partial_index"
         index_2 = "queue_job_channel_date_done_date_created_index"
-        if not index_exists(self._cr, index_1):
+        if not index_exists(self.env.cr, index_1):
             # Used by Job.job_record_with_same_identity_key
-            self._cr.execute(
+            self.env.cr.execute(
                 "CREATE INDEX queue_job_identity_key_state_partial_index "
                 "ON queue_job (identity_key) WHERE state in ('pending', "
                 "'enqueued', 'wait_dependencies') AND identity_key IS NOT NULL;"
             )
-        if not index_exists(self._cr, index_2):
+        if not index_exists(self.env.cr, index_2):
             # Used by <queue.job>.autovacuum
-            self._cr.execute(
+            self.env.cr.execute(
                 "CREATE INDEX queue_job_channel_date_done_date_created_index "
                 "ON queue_job (channel, date_done, date_created);"
             )
