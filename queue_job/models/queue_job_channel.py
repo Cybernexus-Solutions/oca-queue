@@ -26,13 +26,10 @@ class QueueJobChannel(models.Model):
         default=lambda self: self.env["queue.job"]._removal_interval, required=True
     )
 
-    _constraints = [
-        models.Constraint(
-            name="name_uniq",
-            sql="unique(complete_name)",
-            message=_("Channel complete name must be unique"),
-        ),
-    ]
+    _complete_name_uniq = models.Constraint(
+            'UNIQUE (complete_name)',
+            'Channel complete name must be unique',
+    )
 
     @api.depends("name", "parent_id.complete_name")
     def _compute_complete_name(self):
